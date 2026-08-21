@@ -1,0 +1,34 @@
+# Smithery configuration for Stripe
+# Schema: https://smithery.ai/docs/build/project-config
+# Remote HTTP MCP — server hosted at https://api.mcp.ai/p_stripe
+
+name: stripe-mcp
+displayName: "Stripe"
+description: >
+  Pagamentos e billing no Stripe com a API REST oficial completa (api.stripe.com), cobre toda a documentação: clientes, cobranças, payment intents, assinaturas, faturas, reembolsos, disputas, produtos, preços, cupons, payment links, checkout, repasses, payouts, saldo, métodos de pagamento, tax, radar, issuing, connect e mais. Consulta e operação. Autenticação por chave secreta da conta Stripe (em Developers, API keys). Recomendamos uma chave restrita (rk_) com só os escopos necessários. Se restringir a chave por IP, libere o IP fixo de saída 3.94.44.196.
+
+version: 0.1.0
+license: MIT
+homepage: https://github.com/mcp-dir/stripe-mcp
+repository: https://github.com/mcp-dir/stripe-mcp
+
+tags:
+  - stripe
+  - brazil
+  - fin
+  - horizontal
+  - read-only
+
+# Remote HTTP MCP — sem startCommand local (servidor já hospedado)
+startCommand:
+  type: http
+  url: https://api.mcp.ai/p_stripe
+
+auth:
+  type: oauth2
+  resourceMetadataUrl: https://api.mcp.ai/p_stripe/.well-known/oauth-protected-resource
+  fallback:
+    type: agent-auth
+    description: >
+      Para clientes sem OAuth 2.1. O agente expõe uma tool authenticate(token).
+      Usuário gera o JWT em https://app.mcp.ai/agent-auth e cola no chat.
